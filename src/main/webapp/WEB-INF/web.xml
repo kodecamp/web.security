@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+  <!-- normal user resources -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Restricted resources</web-resource-name>
+      <url-pattern>/BasicSecuredServlet</url-pattern>
+      <url-pattern>/DigestSecuredServlet</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>users</role-name>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <!-- admin resources -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admin resources</web-resource-name>
+      <url-pattern>/DatabaseSecuredServlet</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <!-- role declarations -->
+  <security-role>
+    <role-name>users</role-name>
+  </security-role>
+
+  <security-role>
+    <role-name>admin</role-name>
+  </security-role>
+
+    
+  <!-- base64 encoding is done for password -->
+  <!-- it can be used if we are using secure connection (https) -->
+  <!--    <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>-->
+
+  <!-- password encryption is done -->
+  <!--  <login-config>
+    <auth-method>DIGEST</auth-method>
+    <realm-name>whatever</realm-name>
+  </login-config>-->
+
+  <!-- browser represents the custom form done -->
+  <login-config>
+    <auth-method>FORM</auth-method>
+
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+
+    
+</web-app>

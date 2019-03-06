@@ -1,0 +1,25 @@
+JavaSecurityManager
+
+
+
+
+JAAS
+
+User-based security rules.
+
+1. AUTHENTICATION
+
+ a. Application delegates to login context
+ b. Login Context calls login modules
+ c. Login Module has the actual implementation of authentication process.
+
+So : App ---> Login Context ---> Login Module
+
+Terminology :
+
+ "SUBJECT" (An authenticated user executing the application) has
+ "PRINCIPAL" (Idnetities of subject [username or groups]) and
+ "CREDENTIALS"(Information used to authenticate the subject)
+
+Login Module ---> accepts---> callback handler
+
