@@ -16,3 +16,5 @@ INSERT INTO USERS VALUES ('kcamp', 'kcamp');
 INSERT INTO ROLES VALUES('kodecamp', 'admin');
 INSERT INTO ROLES VALUES('kcamp', 'users');
 
+-- SHOW THE INSERTED RECORDS                                                           
+SELECT * FROM USERS LEFT OUTER JOIN ROLES ON USERS.USERNAME = ROLES.USERNAME;
