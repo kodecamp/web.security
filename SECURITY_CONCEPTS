@@ -1,8 +1,4 @@
 JavaSecurityManager
-
-
-
-
 JAAS
 
 User-based security rules.
@@ -16,10 +12,47 @@ User-based security rules.
 So : App ---> Login Context ---> Login Module
 
 Terminology :
-
+ 
+ "User" : An individual (or machine) whose identity is defined in the identity storage.
+ "Credential" : Information used to authenticate a user.
+ "Typically a user certificate(password"
+ "Group" : set of users classified with a set of common privileages
+ 
+ Security Realm(Mechanisms) : 
+  - Mechanism by which an application server stores users's credential and group info.
+  - Security Realms = FILE, JDBC, LDAP, CERT
+  
+  JDBC Realm
+  
+    1. Create Table users 
+    2. Group Table
+    
+    Note : A user can belong to many groups
+  
  "SUBJECT" (An authenticated user executing the application) has
  "PRINCIPAL" (Idnetities of subject [username or groups]) and
  "CREDENTIALS"(Information used to authenticate the subject)
 
 Login Module ---> accepts---> callback handler
+
+Note : All the above things are configured at the server.
+
+tomee configuration for form based authentication(jdbc realm)
+
+tomcat-dir/config/server.xml : Configure realm in this file as
+
+<Realm className="org.apache.catalina.realm.JDBCRealm" 
+       connectionName="dbusername" 
+       connectionPassword="dbpassword" 
+       connectionURL="jdbc:h2:tcp://localhost/~/collegewebappdb" 
+       debug="99" 
+       driverName="org.h2.Driver" 
+       roleNameCol="rolename" 
+       userCredCol="password" userRoleTable="roles" userTable="users"/>
+
+
+JEE Security Mothods
+
+client -----> web tier -----> ejb tier ----->
+              
 

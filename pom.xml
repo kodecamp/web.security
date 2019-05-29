@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>in.kodecamp</groupId>
-  <artifactId>web.security</artifactId>
+  <artifactId>jee.security.concepts</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
