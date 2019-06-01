@@ -30,7 +30,7 @@ Terminology :
     Note : A user can belong to many groups
   
  "SUBJECT" (An authenticated user executing the application) has
- "PRINCIPAL" (Idnetities of subject [username or groups]) and
+ "PRINCIPAL" (Identities of subject [username or groups]) and
  "CREDENTIALS"(Information used to authenticate the subject)
 
 Login Module ---> accepts---> callback handler

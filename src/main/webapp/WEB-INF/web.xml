@@ -11,6 +11,7 @@
       <web-resource-name>Restricted resources</web-resource-name>
       <url-pattern>/BasicSecuredServlet</url-pattern>
       <url-pattern>/DigestSecuredServlet</url-pattern>
+      <url-pattern>/public/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>users</role-name>
@@ -23,13 +24,14 @@
     <web-resource-collection>
       <web-resource-name>Admin resources</web-resource-name>
       <url-pattern>/DatabaseSecuredServlet</url-pattern>
+      <url-pattern>/restricted/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>
     </auth-constraint>
   </security-constraint>
 
-  <!-- role declarations 
+  <!-- role declarations -->
   <security-role>
     <role-name>users</role-name>
   </security-role>
@@ -37,7 +39,7 @@
   <security-role>
     <role-name>admin</role-name>
   </security-role>
--->
+
     
   <!-- base64 encoding is done for password -->
   <!-- it can be used if we are using secure connection (https) -->
@@ -56,10 +58,50 @@
     <auth-method>FORM</auth-method>
 
     <form-login-config>
-      <form-login-page>/login.jsp</form-login-page>
+      <form-login-page>/login.xhtml</form-login-page>
+      <!--  Uncomment this in case of servlet/jsp -->
+      <!--  <form-login-page>/login.jsp</form-login-page> -->
       <form-error-page>/error.jsp</form-error-page>
     </form-login-config>
   </login-config>
-
+  
+  
+<context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>org.primefaces.extensions.DELIVER_UNCOMPRESSED_RESOURCES</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>primefaces.FONT_AWESOME</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>nova-light</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>
+      1
+    </session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
     
 </web-app>
