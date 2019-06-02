@@ -12,6 +12,7 @@
       <url-pattern>/BasicSecuredServlet</url-pattern>
       <url-pattern>/DigestSecuredServlet</url-pattern>
       <url-pattern>/public/*</url-pattern>
+      <url-pattern>/mixed/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>users</role-name>
@@ -24,7 +25,7 @@
     <web-resource-collection>
       <web-resource-name>Admin resources</web-resource-name>
       <url-pattern>/DatabaseSecuredServlet</url-pattern>
-      <url-pattern>/restricted/*</url-pattern>
+      <url-pattern>/private/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>
@@ -58,14 +59,15 @@
     <auth-method>FORM</auth-method>
 
     <form-login-config>
-      <form-login-page>/login.xhtml</form-login-page>
+     <!--  <form-login-page>/login.xhtml</form-login-page> -->
       <!--  Uncomment this in case of servlet/jsp -->
-      <!--  <form-login-page>/login.jsp</form-login-page> -->
+       <form-login-page>/login.xhtml</form-login-page>
       <form-error-page>/error.jsp</form-error-page>
+      
     </form-login-config>
   </login-config>
   
-  
+  <!-- JSF SPECIFIC CONFIGURATION -->
 <context-param>
     <param-name>javax.faces.PROJECT_STAGE</param-name>
     <param-value>Development</param-value>
@@ -86,22 +88,54 @@
     <param-name>primefaces.THEME</param-name>
     <param-value>nova-light</param-value>
   </context-param>
+  
+  <context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>server</param-value>
+  </context-param>
+  
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  
+  <!-- ERROR PAGE CONFIG -->
+    <error-page>
+		<error-code>404</error-code>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>408</error-code>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/faces/error.xhtml</location>
+	</error-page>
+	
+	<!--  SESSION CONFIG -->
   <session-config>
     <session-timeout>
       1
     </session-timeout>
   </session-config>
+  
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
     
 </web-app>

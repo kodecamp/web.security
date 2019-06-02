@@ -6,21 +6,17 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf" template="../template.xhtml">
 
 	<ui:define name="content">
-		<h1>Public Page</h1>
+		<h1>Mixed Actions Page</h1>
+		<ui:param name="title" value="Mixed Actions Page"/>
 
-		<ui:param name="title" value="Public Page"></ui:param>
-
-		<h:commandButton action="#{demoBean.userAction}"
-			value="User Action(users)"></h:commandButton>
-
-		<h:outputText value="  " escape="false" />
-
+		<h:commandButton action="#{demoBean.userAction}" value="User Action(users)"></h:commandButton>
 		<h:commandButton action="#{demoBean.adminAction}"
-			value="Admin Action(admin)"></h:commandButton>
+			value="Admin Action(admin)" rendered="#{demoBean.user.admin}"></h:commandButton>
 
 		<h:outputText value="  " escape="false" />
 
 		<br></br>
+
 		<h:outputText value="#{demoBean.message}" escape="true"></h:outputText>
 	</ui:define>
 </ui:composition>

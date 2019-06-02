@@ -36,8 +36,8 @@ public class DemoBean {
     try {
       this.message = service.publicMethod();
     } catch (EJBAccessException ejbAccessEx) {
-      this.message = "This operation is not accessible for " + this.user.getName()
-          + "Having role : " + this.user.getRole();
+      this.message = "This operation is not accessible for user : " + this.user.getName()
+          + " having role : " + this.user.getRole() + "";
     }
   }
 
@@ -46,11 +46,11 @@ public class DemoBean {
    */
   public void adminAction() {
     try {
-
       this.message = service.securedMethod();
     } catch (EJBAccessException ejbAccessEx) {
-      this.message = "This operation is not accessible for " + this.user.getName()
-          + "Having role : " + this.user.getRole();
+      System.out.println("Access is denied.");
+      this.message = "This operation is not accessible for user : " + this.user.getName()
+      + " having role : " + this.user.getRole() + " ";
     }
   }
 
@@ -71,6 +71,8 @@ public class DemoBean {
   }
 
   public String logOut() throws ServletException {
+    
+    System.out.println("DemoBean : logOut");
     ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
     HttpServletResponse response = (HttpServletResponse)ectx.getResponse();
     HttpSession session = (HttpSession)ectx.getSession(false);
@@ -81,7 +83,7 @@ public class DemoBean {
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
     response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
     response.setDateHeader("Expires", 0); // Proxies.
-    return "login";
+    return "/exit?faces-redirect=true";
   }
 
 }

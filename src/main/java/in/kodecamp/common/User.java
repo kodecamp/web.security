@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-@SessionScoped
+@RequestScoped
 public class User implements Serializable {
   private static final long serialVersionUID = 1L;
   private String role;
@@ -21,6 +22,7 @@ public class User implements Serializable {
   public void init() {
     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance()
         .getExternalContext().getRequest();
+    this.name = request.getRemoteUser();
     final List<String> roles = Arrays.asList(ALL_ROLES);
     this.role = roles.stream().filter(request::isUserInRole).findFirst().get();
   
